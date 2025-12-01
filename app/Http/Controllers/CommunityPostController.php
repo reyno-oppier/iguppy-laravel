@@ -65,14 +65,16 @@ class CommunityPostController extends Controller
     {
         $post = CommunityPost::findOrFail($id);
 
-        // Only owner can delete
-        if ($post->user_id !== auth()->id()) {
+        // Allow Admin OR owner
+        if (auth()->user()->name !== 'Admin' && $post->user_id !== auth()->id()) {
             abort(403);
         }
 
         $post->delete();
+
         return back()->with('success', 'Note deleted successfully!');
     }
+        
 
 }
 

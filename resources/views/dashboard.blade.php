@@ -1,4 +1,4 @@
-@section('title', 'Dashboard - iGuppy')
+@section('title', 'Dashboard - iGuppy | Sistem Monitoring Akuarium')
 <x-app-layout>
     <button id="toggleSidebar" class="fixed top-4 left-4 text-white text-2xl z-50 bg-gray-800 p-2 rounded-md shadow-md hover:bg-gray-700 transition">
         ☰
@@ -20,10 +20,18 @@
                 <span class="text-2xl">💬</span>
                 <span class="menu-text opacity-0 transition-opacity duration-300">Community</span>
             </a>
+            @if(auth()->user()->name !== 'Admin')
             <a href="{{ route('account.edit') }}" class="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition w-full">
                 <span class="text-2xl">👤</span>
                 <span class="menu-text opacity-0 transition-opacity duration-300">Akun</span>
             </a>
+            @endif
+            @if(auth()->user()->name === 'Admin')
+                <a href="{{ route('users.index') }}" class="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition w-full">
+                    <span class="text-2xl">👥</span>
+                    <span class="menu-text opacity-0 transition-opacity duration-300">Users</span>
+                </a>
+            @endif
         </nav>
     </aside>
 
